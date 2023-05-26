@@ -1,0 +1,12 @@
+﻿INSERT INTO takmicenje  VALUES (1, 'Premier League');
+INSERT INTO takmicenje  VALUES (2, 'La Liga');
+INSERT INTO takmicenje  VALUES (3, 'Bundesliga');
+INSERT INTO takmicenje  VALUES (4, 'Serie A');
+INSERT INTO takmicenje  VALUES (5, 'Ligue 1');
+INSERT INTO takmicenje  VALUES (6, 'Jelen SUper Liga');
+INSERT INTO takmicenje  VALUES (7, 'Eredivisie');
+INSERT INTO takmicenje  VALUES (8, 'Champions leauge');
+INSERT INTO takmicenje  VALUES (9, 'Europe legaue');
+INSERT INTO takmicenje  VALUES (10, 'Conferencion leauge');
+INSERT INTO takmicenje  VALUES (11, 'Euro');
+INSERT INTO takmicenje VALUES (12, 'World Cup');
