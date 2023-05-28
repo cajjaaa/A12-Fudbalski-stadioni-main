@@ -91,8 +91,12 @@ namespace A12
             Pretraga p = new Pretraga();
             p.ShowDialog();
 
+           //ako je kliknuto dugme cancel ne proverava vrednost
             if(p.Canceled) return;
+
             string drzava=p.GetText();
+           
+           //ukoliko se ne unese drzava za pretragu ispisuju se svi stadioni kao i na pocetku - Load
             if (drzava == "")
             {
                 Konekcija();
@@ -127,6 +131,7 @@ namespace A12
                 dt.Clear();
                 konekcija.Close();
             }
+           //ispis stadiona koji se nalaze u unetoj drzavi
             else
             {
                 Konekcija();

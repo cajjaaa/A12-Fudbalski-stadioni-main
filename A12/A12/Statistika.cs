@@ -49,6 +49,7 @@ namespace A12
             chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
            //chart
             konekcija.Open();
+           //citac podataka iz baze 
             SqlDataReader reader = komanda.ExecuteReader();        
            //brojac stadiona
             int i=0;
