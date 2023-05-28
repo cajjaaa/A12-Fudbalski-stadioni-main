@@ -30,16 +30,8 @@ namespace A12
 
         private void button1_Click(object sender, EventArgs e)//ok
         {
-            if (textBox1.Text=="")
-            {
-                Close();
-            }
-            else
-            {
-                Canceled = false;
-                Close();
-            }
-            
+            Canceled = false;
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)//cancel

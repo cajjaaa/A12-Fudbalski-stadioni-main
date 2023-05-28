@@ -37,6 +37,7 @@ namespace A12
             da = new SqlDataAdapter();
         }
 
+
         private void Stadion_Load(object sender, EventArgs e)
         {
             Konekcija();
@@ -78,8 +79,8 @@ namespace A12
             //ispis svih gradova u comboBox1
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
-                string citalac = dt1.Rows[i][1].ToString();
-                comboBox1.Items.Add(citalac);
+                string grad = dt1.Rows[i][1].ToString();
+                comboBox1.Items.Add(grad);
             }
             dt1.Clear();
             konekcija.Close();
@@ -91,30 +92,78 @@ namespace A12
             p.ShowDialog();
 
             if(p.Canceled) return;
-            string drzava = p.GetText();
-
-            Konekcija();
-            komanda.CommandText = "SELECT stadion.StadionID,stadion.Naziv,grad.Grad,stadion.Kapacitet,stadion.Adresa, stadion.BrojUlaza FROM stadion JOIN grad  ON stadion.GradID=grad.GradID JOIN drzave ON grad.DrzavaID=drzave.DrzavaID WHERE drzave.naziv = @drzava";
-            komanda.Parameters.AddWithValue("@drzava", drzava);
-            
-            da.SelectCommand = komanda;
-            da.Fill(dt);
-            listView1.Items.Clear();
-
-            foreach (DataRow red in dt.Rows)
+            string drzava=p.GetText();
+            if (drzava == "")
             {
-                string[] podaci ={
+                Konekcija();
+                listView1.Clear();
+
+                listView1.Columns.Add("Šifra", 40);
+                listView1.Columns.Add("Naziv", 130);
+                listView1.Columns.Add("Grad", 80);
+                listView1.Columns.Add("Kapacitet", 70);
+                listView1.Columns.Add("Adresa", 250);
+                listView1.Columns.Add("Br. ulaza", 70);
+
+                listView1.View = View.Details;
+                listView1.FullRowSelect = true;
+
+                komanda.CommandText = "SELECT stadion.StadionID,stadion.Naziv,grad.Grad,stadion.Kapacitet,stadion.Adresa, stadion.BrojUlaza FROM stadion JOIN grad  ON stadion.GradID=grad.GradID";
+                da.SelectCommand = komanda;
+                da.Fill(dt);
+
+                foreach (DataRow red in dt.Rows){
+                    string[] podaci ={
                         red[0].ToString(),
                         red[1].ToString(),
                         red[2].ToString(),
                         red[3].ToString(),
                         red[4].ToString(),
                         red[5].ToString()
-                };
+                    };
                 ListViewItem stavka = new ListViewItem(podaci);
                 listView1.Items.Add(stavka);
-            }dt.Clear();
-            konekcija.Close();
+                }
+                dt.Clear();
+                konekcija.Close();
+            }
+            else
+            {
+                Konekcija();
+                listView1.Clear();
+
+                listView1.Columns.Add("Šifra", 40);
+                listView1.Columns.Add("Naziv", 130);
+                listView1.Columns.Add("Grad", 80);
+                listView1.Columns.Add("Kapacitet", 70);
+                listView1.Columns.Add("Adresa", 250);
+                listView1.Columns.Add("Br. ulaza", 70);
+
+                listView1.View = View.Details;
+                listView1.FullRowSelect = true;
+
+                komanda.CommandText = "SELECT stadion.StadionID,stadion.Naziv,grad.Grad,stadion.Kapacitet,stadion.Adresa, stadion.BrojUlaza FROM stadion JOIN grad ON stadion.GradID=grad.GradID JOIN drzave ON grad.DrzavaID=drzave.DrzavaID WHERE drzave.naziv = @drzava";
+                komanda.Parameters.AddWithValue("@drzava", drzava);
+            
+                da.SelectCommand = komanda;
+                da.Fill(dt);
+                listView1.Items.Clear();
+
+                foreach (DataRow red in dt.Rows)
+                {
+                    string[] podaci ={
+                            red[0].ToString(),
+                            red[1].ToString(),
+                            red[2].ToString(),
+                            red[3].ToString(),
+                            red[4].ToString(),
+                            red[5].ToString()
+                    };
+                    ListViewItem stavka = new ListViewItem(podaci);
+                    listView1.Items.Add(stavka);
+                }dt.Clear();
+                konekcija.Close();
+            }
         }
         private void button2_Click(object sender, EventArgs e)//update
         {
