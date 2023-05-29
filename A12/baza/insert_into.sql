@@ -53,7 +53,7 @@ INSERT INTO Grad (GradID, Grad, PozivniBroj, PostanskiBroj, BrojStanovnika, Drza
 INSERT INTO Grad (GradID, Grad, PozivniBroj, PostanskiBroj, BrojStanovnika, DrzavaID) VALUES (25, 'Madrid', '91', '28001', 3266126, 11);
 
 /*STADIONI*/
-INSERT INTO Stadion (StadionID, Naziv, Adresa, Kapacitet, BrojUlaza, GradID) VALUES (1, 'Camp Nou', "C. d'Arístides Maillol, 12", 50000, 10, 5);
+INSERT INTO Stadion (StadionID, Naziv, Adresa, Kapacitet, BrojUlaza, GradID) VALUES (1, 'Camp Nou', 'C. d Arístides Maillol, 12', 50000, 10, 5);
 INSERT INTO Stadion (StadionID, Naziv, Adresa, Kapacitet, BrojUlaza, GradID) VALUES (2, 'Old Trafford', 'Sir Matt Busby Way, Stretford', 40000, 8, 18);
 INSERT INTO Stadion (StadionID, Naziv, Adresa, Kapacitet, BrojUlaza, GradID) VALUES (3, 'Santiago Bernabeu', 'Madrid, Španija', 35000, 6, 25);
 INSERT INTO Stadion (StadionID, Naziv, Adresa, Kapacitet, BrojUlaza, GradID) VALUES (4, 'San Siro', 'Av. de Concha Espina, 1', 81044, 9, 15);

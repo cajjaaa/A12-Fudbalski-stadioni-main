@@ -37,69 +37,9 @@ namespace A12
             da = new SqlDataAdapter();
         }
 
-
-        private void Stadion_Load(object sender, EventArgs e)
+        public void Prikaz()
         {
             Konekcija();
-            listView1.Clear();//refresh-ovanje
-
-            listView1.Columns.Add("Šifra", 40);
-            listView1.Columns.Add("Naziv", 130);
-            listView1.Columns.Add("Grad", 80);
-            listView1.Columns.Add("Kapacitet", 70);
-            listView1.Columns.Add("Adresa", 250);
-            listView1.Columns.Add("Br. ulaza", 70);
-
-            listView1.View = View.Details;
-            listView1.FullRowSelect = true;
-            
-            komanda.CommandText = "SELECT stadion.StadionID,stadion.Naziv,grad.Grad,stadion.Kapacitet,stadion.Adresa, stadion.BrojUlaza FROM stadion JOIN grad  ON stadion.GradID=grad.GradID";
-            da.SelectCommand = komanda;
-            da.Fill(dt);
-
-            //ispis stadiona listView1
-            foreach (DataRow red in dt.Rows){
-                string[] podaci ={
-                    red[0].ToString(),
-                    red[1].ToString(),
-                    red[2].ToString(),
-                    red[3].ToString(),
-                    red[4].ToString(),
-                    red[5].ToString()
-                };
-               ListViewItem stavka = new ListViewItem(podaci);
-               listView1.Items.Add(stavka);
-            }
-            dt.Clear();
-            
-            komanda.CommandText = "SELECT * FROM grad";
-            da.SelectCommand = komanda;
-            da.Fill(dt1);
-
-            //ispis svih gradova u comboBox1
-            for (int i = 0; i < dt1.Rows.Count; i++)
-            {
-                string grad = dt1.Rows[i][1].ToString();
-                comboBox1.Items.Add(grad);
-            }
-            dt1.Clear();
-            konekcija.Close();
-        }
-
-        private void button1_Click(object sender, EventArgs e)//pretraga
-        {
-            Pretraga p = new Pretraga();
-            p.ShowDialog();
-
-           //ako je kliknuto dugme cancel ne proverava vrednost
-            if(p.Canceled) return;
-
-            string drzava=p.GetText();
-           
-           //ukoliko se ne unese drzava za pretragu ispisuju se svi stadioni kao i na pocetku - Load
-            if (drzava == "")
-            {
-                Konekcija();
                 listView1.Clear();
 
                 listView1.Columns.Add("Šifra", 40);
@@ -130,6 +70,41 @@ namespace A12
                 }
                 dt.Clear();
                 konekcija.Close();
+        }
+
+        private void Stadion_Load(object sender, EventArgs e)
+        {
+           
+            Prikaz();
+            Konekcija();
+            komanda.CommandText = "SELECT * FROM grad";
+            da.SelectCommand = komanda;
+            da.Fill(dt1);
+
+            //ispis svih gradova u comboBox1
+            for (int i = 0; i < dt1.Rows.Count; i++)
+            {
+                string grad = dt1.Rows[i][1].ToString();
+                comboBox1.Items.Add(grad);
+            }
+            dt1.Clear();
+            konekcija.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)//pretraga
+        {
+            Pretraga p = new Pretraga();
+            p.ShowDialog();
+
+           //ako je kliknuto dugme cancel ne proverava vrednost
+            if(p.Canceled) return;
+
+            string drzava=p.GetText();
+           
+           //ukoliko se ne unese drzava za pretragu ispisuju se svi stadioni kao i na pocetku - Load
+            if (drzava == "")
+            {
+               Prikaz();
             }
            //ispis stadiona koji se nalaze u unetoj drzavi
             else
